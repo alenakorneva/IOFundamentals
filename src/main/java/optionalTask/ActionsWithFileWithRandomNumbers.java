@@ -11,11 +11,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class FileWithRandomNumbersCreation {
+public class ActionsWithFileWithRandomNumbers {
     private ArrayList<Integer> randomNumbers;
     ArrayList<Integer> linesFromFile = new ArrayList<>();
 
-    public FileWithRandomNumbersCreation(ArrayList<Integer> randomNumbers) {
+    public ActionsWithFileWithRandomNumbers(ArrayList<Integer> randomNumbers) {
         this.randomNumbers = randomNumbers;
     }
 

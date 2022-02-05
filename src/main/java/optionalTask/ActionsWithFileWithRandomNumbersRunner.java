@@ -2,8 +2,9 @@ package optionalTask;
 
 import java.util.ArrayList;
 
-public class FileWithRandomNumbersCreationRunner {
+public class ActionsWithFileWithRandomNumbersRunner {
     private static ArrayList<Integer> randomNumbers;
+
     static {
         randomNumbers = new ArrayList<Integer>(){{
             add((int) (Math.random()*10));
@@ -13,7 +14,7 @@ public class FileWithRandomNumbersCreationRunner {
     }
 
     public static void main(String[] args){
-        FileWithRandomNumbersCreation file = new FileWithRandomNumbersCreation(randomNumbers);
+        ActionsWithFileWithRandomNumbers file = new ActionsWithFileWithRandomNumbers(randomNumbers);
         file.createFileWithRandomNumbers();
         ArrayList <Integer> linesFromFile = file.readNumbersFromFile();
         ArrayList<Integer> sortedLinesFromFile = file.sortLinesFromFile(linesFromFile);
