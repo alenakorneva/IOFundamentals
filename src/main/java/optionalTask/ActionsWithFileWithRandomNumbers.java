@@ -13,7 +13,7 @@ import java.util.Collections;
 
 public class ActionsWithFileWithRandomNumbers {
     private ArrayList<Integer> randomNumbers;
-    ArrayList<Integer> linesFromFile = new ArrayList<>();
+    private ArrayList<Integer> linesFromFile = new ArrayList<>();
 
     public ActionsWithFileWithRandomNumbers(ArrayList<Integer> randomNumbers) {
         this.randomNumbers = randomNumbers;

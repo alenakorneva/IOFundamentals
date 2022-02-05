@@ -1,0 +1,19 @@
+public class ActionsWithFileWithRandomNumbers {
+    private ArrayList<Integer> randomNumbers;
+    private ArrayList<Integer> linesFromFile = new ArrayList<>();
+
+    public ActionsWithFileWithRandomNumbers(ArrayList<Integer> randomNumbers) {
+        this.randomNumbers = randomNumbers;
+    }
+
+    public void createFileWithRandomNumbers(){
+        try (BufferedWriter fileChannel =  Files.newBufferedWriter(Paths.get("D:\\IOFundamentals\\src\\main\\resources\\fileToWriteRandomNumbers.txt"), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW)){
+            for (Integer number : randomNumbers){
+                fileChannel.write(number + "\n");
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+}
+
