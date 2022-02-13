@@ -1,0 +1,12 @@
+
+mainDirectoryForMainTask
+directory1
+directory2
+fileNumberFourInTheSecondDirectory.txt
+fileNumberOneInTheSecondDirectory.txt
+fileNumberThreeInTheSecondDirectory.txt
+fileNumberTwoInTheSecondDirectory.txt
+fileNumberFourInTheFirstDirectory.txt
+fileNumberOneInTheFirstDirectory.txt
+fileNumberThreeInTheFirstDirectory.txt
+fileNumberTwoInTheFirstDirectory.txt

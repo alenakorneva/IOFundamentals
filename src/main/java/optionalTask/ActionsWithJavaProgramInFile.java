@@ -11,36 +11,35 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class ActionsWithJavaProgramInFile {
-    private ArrayList<String> linesFromFile = new ArrayList<>();
-    private ArrayList<String> linesFromFileWithReversedCharacters = new ArrayList<>();
-
-    public ArrayList<String> readJavaProgramFromFile(){
-        try(BufferedReader fileReader = new BufferedReader(new FileReader("D:\\IOFundamentals\\src\\main\\resources\\javaProgramForTask3.txt"))){
+    public ArrayList<String> readJavaProgramFromFile() {
+        ArrayList<String> linesFromFile = new ArrayList<>();
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.javaProgramForTask3))) {
             String line;
-            while ((line = fileReader.readLine()) != null){
+            while ((line = fileReader.readLine()) != null) {
                 linesFromFile.add(line);
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return linesFromFile;
     }
 
-    public ArrayList<String> reverseOrderOfCharactersInEachLine(ArrayList<String> linesFromFile){
-        for(String line : linesFromFile){
+    public ArrayList<String> reverseOrderOfCharactersInEachLine(ArrayList<String> linesFromFile) {
+        ArrayList<String> linesFromFileWithReversedCharacters = new ArrayList<>();
+        for (String line : linesFromFile) {
             StringBuffer lineInTypeOfStringBuffer = new StringBuffer(line);
             linesFromFileWithReversedCharacters.add(lineInTypeOfStringBuffer.reverse().toString());
         }
         return linesFromFileWithReversedCharacters;
     }
 
-    public void writeInFileLinesWithReversedCharacters(ArrayList<String> linesFromFileWithReversedCharacters){
-        try(BufferedWriter fileWriter = Files.newBufferedWriter(Paths.get("D:\\IOFundamentals\\src\\main\\resources\\javaProgramForTask3.txt"), StandardCharsets.UTF_8, StandardOpenOption.APPEND)){
+    public void writeInFileLinesWithReversedCharacters(ArrayList<String> linesFromFileWithReversedCharacters) {
+        try (BufferedWriter fileWriter = Files.newBufferedWriter(Paths.get(PathNames.javaProgramForTask3), StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
             fileWriter.write("\n");
-            for (String line : linesFromFileWithReversedCharacters){
+            for (String line : linesFromFileWithReversedCharacters) {
                 fileWriter.write(line + "\n");
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

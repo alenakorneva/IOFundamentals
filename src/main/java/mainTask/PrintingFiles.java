@@ -15,7 +15,7 @@ public class PrintingFiles extends SimpleFileVisitor<Path> {
     public FileVisitResult preVisitDirectory(Path directory, BasicFileAttributes basicFileAttributes) {
         System.out.println(directory.getFileName());
         try {
-            Files.write(Paths.get("D:\\IOFundamentals\\src\\main\\resources\\treeDirectoriesFromMainTask.txt"), (directory.getFileName().toString() + "\n").getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+            Files.write(Paths.get("D:\\TasksFromEpamCourses\\IOFundamentals\\src\\main\\resources\\treeDirectoriesFromMainTask.txt"), (directory.getFileName().toString() + "\n").getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,7 +26,7 @@ public class PrintingFiles extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes basicFileAttributes) {
         System.out.println(file.getFileName());
         try {
-            Files.write(Paths.get("D:\\IOFundamentals\\src\\main\\resources\\treeDirectoriesFromMainTask.txt"), (file.getFileName().toString() + "\n").getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+            Files.write(Paths.get("D:\\TasksFromEpamCourses\\IOFundamentals\\src\\main\\resources\\treeDirectoriesFromMainTask.txt"), (file.getFileName().toString() + "\n").getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
         } catch (IOException e) {
             e.printStackTrace();
         }

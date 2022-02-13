@@ -13,14 +13,13 @@ import java.util.Collections;
 
 public class ActionsWithFileWithRandomNumbers {
     private ArrayList<Integer> randomNumbers;
-    private ArrayList<Integer> linesFromFile = new ArrayList<>();
 
     public ActionsWithFileWithRandomNumbers(ArrayList<Integer> randomNumbers) {
         this.randomNumbers = randomNumbers;
     }
 
     public void createFileWithRandomNumbers(){
-        try (BufferedWriter fileChannel =  Files.newBufferedWriter(Paths.get("D:\\IOFundamentals\\src\\main\\resources\\fileToWriteRandomNumbers.txt"), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW)){
+        try (BufferedWriter fileChannel =  Files.newBufferedWriter(Paths.get(PathNames.fileToWriteRandomNumbers), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW)){
             for (Integer number : randomNumbers){
                 fileChannel.write(number + "\n");
             }
@@ -30,7 +29,8 @@ public class ActionsWithFileWithRandomNumbers {
     }
 
     public ArrayList<Integer> readNumbersFromFile(){
-        try(BufferedReader fileReader = new BufferedReader(new FileReader("D:\\IOFundamentals\\src\\main\\resources\\fileToWriteRandomNumbers.txt"))) {
+        ArrayList<Integer> linesFromFile = new ArrayList<>();
+        try(BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.fileToWriteRandomNumbers))) {
             String line;
             while ((line = fileReader.readLine()) != null){
                 linesFromFile.add(Integer.parseInt(line));
@@ -47,7 +47,7 @@ public class ActionsWithFileWithRandomNumbers {
     }
 
     public void writeSortedNumbersInFile(ArrayList<Integer> sortedLinesFromFile){
-        try (BufferedWriter fileChannel =  Files.newBufferedWriter(Paths.get("D:\\IOFundamentals\\src\\main\\resources\\fileToWriteRandomNumbers.txt"), StandardCharsets.UTF_8, StandardOpenOption.APPEND)){
+        try (BufferedWriter fileChannel =  Files.newBufferedWriter(Paths.get(PathNames.fileToWriteRandomNumbers), StandardCharsets.UTF_8, StandardOpenOption.APPEND)){
             fileChannel.write("\n");
             for (Integer line : sortedLinesFromFile){
                 fileChannel.write(line + "\n");

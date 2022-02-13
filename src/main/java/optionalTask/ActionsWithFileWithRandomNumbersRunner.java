@@ -7,8 +7,8 @@ public class ActionsWithFileWithRandomNumbersRunner {
 
     static {
         randomNumbers = new ArrayList<Integer>(){{
-            add((int) (Math.random()*10));
-            add((int) (Math.random()*100));
+            add((int) (Math.random()*10 + 1000));
+            add((int) (Math.random()*100 ));
             add((int) (Math.random()*100));
         }};
     }
