@@ -14,29 +14,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ActionsWithFilesAndDirectories {
-    PrintingFiles printingFiles = new PrintingFiles();
-    protected static int numberOfDirectory;
-    protected static int numberOfFile;
     private Path mainDirectory;
     protected static ArrayList<String> listOfFilesAndDirectoriesInTreeStructure = new ArrayList<>();
 
     public ActionsWithFilesAndDirectories(Path mainDirectory) {
         this.mainDirectory = mainDirectory;
-        walkDirectoryTree();
-    }
-
-    public void walkDirectoryTree() {
-        try {
-            Files.walkFileTree(mainDirectory, printingFiles);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public String createGap(int level) {
         String result = "";
         for (int i = 0; i < level; i++) {
-            result += "\t";
+            result += " ";
         }
         return result;
     }
@@ -45,8 +33,11 @@ public class ActionsWithFilesAndDirectories {
         String gap = createGap(level);
         List<File> filesAndDirectories = new ArrayList<>(Arrays.asList(directory.toFile().listFiles()));
         for (File file : filesAndDirectories) {
-            System.out.println(gap + file.getName());
-            listOfFilesAndDirectoriesInTreeStructure.add(gap + file.getName());
+            if (file.isDirectory()) {
+                listOfFilesAndDirectoriesInTreeStructure.add("D" + gap + file.getName());
+            } else {
+                listOfFilesAndDirectoriesInTreeStructure.add("F" + gap + file.getName());
+            }
             listOfFilesAndDirectoriesInTreeStructure.add("\n");
             if (file.isDirectory()) {
                 getListOfFilesAndDirectoriesInDirectory(file.toPath(), level + 1);
@@ -57,7 +48,7 @@ public class ActionsWithFilesAndDirectories {
     public void writeListOfFilesAndDirectoriesInTreeStructure(ArrayList<String> listOfFilesAndDirectoriesInTreeStructure) {
         for (String line : listOfFilesAndDirectoriesInTreeStructure) {
             try {
-                Files.write(Paths.get(PathNames.treeDerectoriesFromMainTask), line.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+                Files.write(Paths.get(PathNames.treeDirectoriesFromMainTask), line.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -67,7 +58,7 @@ public class ActionsWithFilesAndDirectories {
     public ArrayList<String> readLinesFromFile() {
         String line;
         ArrayList<String> linesFromFile = new ArrayList<>();
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.treeDerectoriesFromMainTask))) {
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.treeDirectoriesFromMainTask))) {
             while ((line = fileReader.readLine()) != null) {
                 linesFromFile.add(line);
             }
@@ -78,15 +69,55 @@ public class ActionsWithFilesAndDirectories {
     }
 
     public int countDirectoriesAmount(ArrayList<String> linesFromFile) {
-        return numberOfDirectory;
-    }
-
-    public double countAverageFilesAmountInDirectories(int directoriesAmount, int filesAmount) {
-        double count = filesAmount / directoriesAmount;
-        return count;
+        int directoriesAmount = 0;
+        for (String line : linesFromFile) {
+            StringBuilder stringBuilderLine = new StringBuilder(line);
+            if (stringBuilderLine.charAt(0) == 'D') {
+                directoriesAmount++;
+            }
+        }
+        return directoriesAmount;
     }
 
     public int countFilesAmount(ArrayList<String> linesFromFile) {
-        return numberOfFile;
+        int filesAmount = 0;
+        for (String line : linesFromFile) {
+            StringBuilder stringBuilderLine = new StringBuilder(line);
+            if (stringBuilderLine.charAt(0) == 'F') {
+                filesAmount++;
+            }
+        }
+        return filesAmount;
+    }
+
+    public double countAverageFilesAmountInDirectories(int directoriesAmount, int filesAmount) {
+        return (double) filesAmount / directoriesAmount;
+    }
+
+    public double countAverageFilesNameLength(ArrayList<String> linesFromFile) {
+        ArrayList<Integer> filesNameLengths = new ArrayList<>();
+        int sumOfLengths = 0;
+
+        for (String line : linesFromFile) {
+            StringBuilder stringBuilderLine = new StringBuilder(line);
+            int indexOfFirstCharacter = 0;
+            if (stringBuilderLine.charAt(0) == 'F') {
+                for (int i = 1; i < stringBuilderLine.length(); i++){
+                    if (stringBuilderLine.charAt(i) != ' '){
+                        indexOfFirstCharacter = i;
+                        break;
+                    }
+                }
+                //add length of each file name to ArrayList
+                filesNameLengths.add((line.substring(indexOfFirstCharacter)).length());
+            }
+        }
+
+        for (Integer fileNameLength : filesNameLengths) {
+            sumOfLengths += fileNameLength;
+        }
+        System.out.println("Sum of all files' names is " + sumOfLengths);
+        System.out.println("Total amount of files is " + filesNameLengths.size());
+        return (double) sumOfLengths / filesNameLengths.size();
     }
 }
