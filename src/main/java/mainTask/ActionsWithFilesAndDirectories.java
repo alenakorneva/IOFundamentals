@@ -35,20 +35,24 @@ public class ActionsWithFilesAndDirectories {
         for (File file : filesAndDirectories) {
             if (file.isDirectory()) {
                 listOfFilesAndDirectoriesInTreeStructure.add("D" + gap + file.getName());
+                listOfFilesAndDirectoriesInTreeStructure.add("\n");
+                getListOfFilesAndDirectoriesInDirectory(file.toPath(), level + 1);
+
             } else {
                 listOfFilesAndDirectoriesInTreeStructure.add("F" + gap + file.getName());
+                listOfFilesAndDirectoriesInTreeStructure.add("\n");
             }
-            listOfFilesAndDirectoriesInTreeStructure.add("\n");
-            if (file.isDirectory()) {
+            //listOfFilesAndDirectoriesInTreeStructure.add("\n");
+            /*if (file.isDirectory()) {
                 getListOfFilesAndDirectoriesInDirectory(file.toPath(), level + 1);
-            }
+            }*/
         }
     }
 
     public void writeListOfFilesAndDirectoriesInTreeStructure(ArrayList<String> listOfFilesAndDirectoriesInTreeStructure) {
         for (String line : listOfFilesAndDirectoriesInTreeStructure) {
             try {
-                Files.write(Paths.get(PathNames.treeDirectoriesFromMainTask), line.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+                Files.write(Paths.get(PathNames.TREE_DIRECTORIES_FROM_MAIN_TASK), line.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -58,7 +62,7 @@ public class ActionsWithFilesAndDirectories {
     public ArrayList<String> readLinesFromFile() {
         String line;
         ArrayList<String> linesFromFile = new ArrayList<>();
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.treeDirectoriesFromMainTask))) {
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.TREE_DIRECTORIES_FROM_MAIN_TASK))) {
             while ((line = fileReader.readLine()) != null) {
                 linesFromFile.add(line);
             }
@@ -100,16 +104,8 @@ public class ActionsWithFilesAndDirectories {
 
         for (String line : linesFromFile) {
             StringBuilder stringBuilderLine = new StringBuilder(line);
-            int indexOfFirstCharacter = 0;
             if (stringBuilderLine.charAt(0) == 'F') {
-                for (int i = 1; i < stringBuilderLine.length(); i++){
-                    if (stringBuilderLine.charAt(i) != ' '){
-                        indexOfFirstCharacter = i;
-                        break;
-                    }
-                }
-                //add length of each file name to ArrayList
-                filesNameLengths.add((line.substring(indexOfFirstCharacter)).length());
+                filesNameLengths.add((line.substring(1).trim().length()));
             }
         }
 

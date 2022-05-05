@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ActionsWithJavaProgramInFile {
     public ArrayList<String> readJavaProgramFromFile() {
         ArrayList<String> linesFromFile = new ArrayList<>();
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.javaProgramForTask3))) {
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.JAVA_PROGRAM_FOR_TASK_3))) {
             String line;
             while ((line = fileReader.readLine()) != null) {
                 linesFromFile.add(line);
@@ -34,7 +34,7 @@ public class ActionsWithJavaProgramInFile {
     }
 
     public void writeInFileLinesWithReversedCharacters(ArrayList<String> linesFromFileWithReversedCharacters) {
-        try (BufferedWriter fileWriter = Files.newBufferedWriter(Paths.get(PathNames.javaProgramForTask3), StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
+        try (BufferedWriter fileWriter = Files.newBufferedWriter(Paths.get(PathNames.JAVA_PROGRAM_FOR_TASK_3), StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
             fileWriter.write("\n");
             for (String line : linesFromFileWithReversedCharacters) {
                 fileWriter.write(line + "\n");

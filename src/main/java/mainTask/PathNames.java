@@ -1,5 +1,5 @@
 package mainTask;
 
 public class PathNames {
-    static final String treeDerectoriesFromMainTask = "D:\\TasksFromEpamCourses\\IOFundamentals\\src\\main\\resources\\treeDirectoriesFromMainTask.txt";
+    static final String TREE_DIRECTORIES_FROM_MAIN_TASK = "src/main/resources/treeDirectoriesFromMainTask.txt";
 }

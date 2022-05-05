@@ -19,7 +19,7 @@ public class ActionsWithFileWithRandomNumbers {
     }
 
     public void createFileWithRandomNumbers(){
-        try (BufferedWriter fileChannel =  Files.newBufferedWriter(Paths.get(PathNames.fileToWriteRandomNumbers), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW)){
+        try (BufferedWriter fileChannel =  Files.newBufferedWriter(Paths.get(PathNames.FILE_TO_WRITE_RANDOM_NUMBERS), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW)){
             for (Integer number : randomNumbers){
                 fileChannel.write(number + "\n");
             }
@@ -30,7 +30,7 @@ public class ActionsWithFileWithRandomNumbers {
 
     public ArrayList<Integer> readNumbersFromFile(){
         ArrayList<Integer> linesFromFile = new ArrayList<>();
-        try(BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.fileToWriteRandomNumbers))) {
+        try(BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.FILE_TO_WRITE_RANDOM_NUMBERS))) {
             String line;
             while ((line = fileReader.readLine()) != null){
                 linesFromFile.add(Integer.parseInt(line));
@@ -47,7 +47,7 @@ public class ActionsWithFileWithRandomNumbers {
     }
 
     public void writeSortedNumbersInFile(ArrayList<Integer> sortedLinesFromFile){
-        try (BufferedWriter fileChannel =  Files.newBufferedWriter(Paths.get(PathNames.fileToWriteRandomNumbers), StandardCharsets.UTF_8, StandardOpenOption.APPEND)){
+        try (BufferedWriter fileChannel =  Files.newBufferedWriter(Paths.get(PathNames.FILE_TO_WRITE_RANDOM_NUMBERS), StandardCharsets.UTF_8, StandardOpenOption.APPEND)){
             fileChannel.write("\n");
             for (Integer line : sortedLinesFromFile){
                 fileChannel.write(line + "\n");

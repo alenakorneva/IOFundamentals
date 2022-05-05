@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ActionsWithJavaProgramChangingPublicToPrivate {
     public ArrayList<String> readJavaProgramFromFile() {
         ArrayList<String> linesFromFile = new ArrayList<>();
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.javaProgramForTask2))) {
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(PathNames.JAVA_PROGRAM_FOR_TASK_2))) {
             String line;
             while ((line = fileReader.readLine()) != null) {
                 linesFromFile.add(line);
@@ -42,7 +42,7 @@ public class ActionsWithJavaProgramChangingPublicToPrivate {
     }
 
     public void writeInFileJvaProgramWithChangedModifiers(ArrayList<String> linesWithChangedModifiers) {
-        try (BufferedWriter fileWriter = Files.newBufferedWriter(Paths.get(PathNames.javaProgramForTask2), StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
+        try (BufferedWriter fileWriter = Files.newBufferedWriter(Paths.get(PathNames.JAVA_PROGRAM_FOR_TASK_2), StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
             fileWriter.write("\n");
             for (String line : linesWithChangedModifiers) {
                 fileWriter.write(line + "\n");
